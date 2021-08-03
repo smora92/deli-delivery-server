@@ -14,11 +14,11 @@ describe.only('Restaurants Endpoints', function () {
             connection: TEST_DATABASE_URL,
         })
         app.set('db', db)
-
-        // after('disconnect from db', () => db.destroy())
-        // before('clean the table', () => db('restaurants').truncate())
-        // afterEach('cleanup', () => db('restaurants').truncate())
     })
+
+    after('disconnect from db', () => db.destroy())
+    before('clean the table', () => db('restaurants').truncate())
+    afterEach('cleanup', () => db('restaurants').truncate())
 
 
 
@@ -35,126 +35,127 @@ describe.only('Restaurants Endpoints', function () {
             })
         })
     })
-    // context(`Given there are restaurants in the database`, () => {
-    //             const testRestaurants = makeRestaurantsArray()
+    context(`Given there are restaurants in the database`, () => {
+        const testRestaurants = makeRestaurantsArray()
 
-    //             beforeEach('insertRestaurants', () => {
-    //                 return db
-    //                     .into('restaurants')
-    //                     .insert(testRestaurants)
-    //             })
-    //             it('GET /api/restaurants responds with 200 and all the restaurants', () => {
-    //                 return supertest(app)
-    //                     .get('/api/restaurants')
-    //                     .expect(200, testRestaurants)
-    //             })
-    //         })
-    //     })
-
-    //     describe(`GET /restaurants/:id`, () => {
-    //         context('Given there are restaurants in the database', () => {
-    //             const testRestaurants = makeRestaurantsArray()
-
-    //             beforeEach('insert restaurants', () => {
-    //                 return db
-    //                     .into('restaurants')
-    //                     .insert(testRestaurants)
-    //             })
-    //             it('GET /restaurants/:id responds with 200 and the specified restaurant', () => {
-    //                 const restaurantId = 2
-    //                 const expectedRestaurant = testRestaurants[restaurantId - 1]
-    //                 return supertest(app)
-    //                     .get(`/restaurants/${restaurantId}`)
-    //                     .expect(200, expectedRestaurant)
-    //             })
-
-    //         })
-    //         context(`Given no restaurants`, () => {
-    //             it(`responds with 404`, () => {
-    //                 const restaurantId = 123456
-    //                 return supertest(app)
-    //                     .get(`/restaurants/${restaurantId}`)
-    //                     .expect(404, { error: { message: `restaurant doesn't exist` } })
-    //             })
-    //         })
-    //     })
-
-    //     describe.only(`POST /api/restaurants`, () => {
-    //         it(`creates a restaurant, responding with 201 and the new restaurant`, function () {
-    //             const requiredFields = [restaurant_name, description, rating, delivery_fee]
-
-    //             requiredFields.forEach(field => {
-
-    //                 const newRestauraunt = {
-    //                     restaurant_name: 'Test new Restaurant',
-    //                     description: "food",
-    //                     rating: '3',
-    //                     delivery_fee: '100'
-    //                 }
-    //                 return supertest(app)
-    //                     .post('/api/restaurants')
-    //                     .send(newRestauraunt)
-    //                     .expect(201)
-    //                     .expect(res => {
-    //                         expect(res.body.restaurant_name).to.eql(newRestauraunt.restaurant_name)
-    //                         expect(res.body.description).to.eql(newRestaurant.description)
-    //                         expect(res.body.rating).to.eql(newRestaurant.rating)
-    //                         expect(res.body).to.have.property('id')
-    //                         expect(res.headers.location).to.eql(`/api/restaurants/${res.body.id}`)
-
-    //                     })
-    //                     .then(postRes =>
-    //                         supertest(app)
-    //                             .get(`/api/restaurants/${postRes.body.id}`)
-    //                             .expect(postRes.body)
-    //                     )
-    //             })
-
-    //             it(`responds with 400 and an error message when the '${field}' is missing`, () => {
-    //                 delete newRestaurant[field]
-
-    //                 return supertest(app)
-    //                     .post('/api/restaurants')
-    //                     .send(newRestaurant)
-    //                     .expect(400, {
-    //                         error: { message: `Missing '${field}' in request body` }
-    //                     })
-    //             })
-    //         })
-    //     })
-
-    // })
+        beforeEach('insertRestaurants', () => {
+            return db
+                .into('restaurants')
+                .insert(testRestaurants)
+        })
+        it('GET /api/restaurants responds with 200 and all the restaurants', () => {
+            return supertest(app)
+                .get('/api/restaurants')
+                .expect(200, testRestaurants)
+        })
+    })
 
 
-    // describe.only(`DELETE /api/restaurants/:restaurant_id`, () => {
-    //     context('Given there are restaurants in the database', () => {
-    //         const testRestaurants = makeRestaurantsArray()
+    describe(`GET /restaurants/:id`, () => {
+        context('Given there are restaurants in the database', () => {
+            const testRestaurants = makeRestaurantsArray()
 
-    //         beforeEach('insert restaurants', () => {
-    //             return db
-    //                 .into('restaurants')
-    //                 .insert(testRestaurants)
-    //         })
+            beforeEach('insert restaurants', () => {
+                return db
+                    .into('restaurants')
+                    .insert(testRestaurants)
+            })
+            it('GET /restaurants/:id responds with 200 and the specified restaurant', () => {
+                const restaurantId = 2
+                const expectedRestaurant = testRestaurants[restaurantId - 1]
+                return supertest(app)
+                    .get(`/restaurants/${restaurantId}`)
+                    .expect(200, expectedRestaurant)
+            })
 
-    //         it('responds with 204 and removes the restaurant', () => {
-    //             const idToRemove = 2
-    //             const expectedRestaurants = testRestaurants.filter(restaurant => restaurant.id !== idToRemove)
-    //             return supertest(app)
-    //                 .delete(`/api/restaurants/${idToRemove}`)
-    //                 .expect(204)
-    //                 .then(res =>
-    //                     supertest(app)
-    //                         .get(`/api/restaurants`)
-    //                         .expect(expectedRestaurants)
-    //                 )
-    //         })
-    //     })
-    //     context(`Given no restaurants`, () => {
-    //         it(`responds with 404`, () => {
-    //             const restaurantId = 123456
-    //             return supertest(app)
-    //                 .delete(`/restaurants/${restaurantId}`)
-    //                 .expect(404, { error: { message: `restaurant doesn't exist` } })
-    //         })
-    //     })
+        })
+        context(`Given no restaurants`, () => {
+            it(`responds with 404`, () => {
+                const restaurantId = 123456
+                return supertest(app)
+                    .get(`/restaurants/${restaurantId}`)
+                    .expect(404, { error: { message: `restaurant doesn't exist` } })
+            })
+        })
+    })
+
+    describe.only(`POST /api/restaurants`, () => {
+        it(`creates a restaurant, responding with 201 and the new restaurant`, function () {
+            const requiredFields = [restaurant_name, description, rating, delivery_fee]
+
+            requiredFields.forEach(field => {
+
+                const newRestauraunt = {
+                    restaurant_name: 'Test new Restaurant',
+                    description: "food",
+                    rating: '3',
+                    delivery_fee: '100'
+                }
+                return supertest(app)
+                    .post('/api/restaurants')
+                    .send(newRestauraunt)
+                    .expect(201)
+                    .expect(res => {
+                        expect(res.body.restaurant_name).to.eql(newRestauraunt.restaurant_name)
+                        expect(res.body.description).to.eql(newRestaurant.description)
+                        expect(res.body.rating).to.eql(newRestaurant.rating)
+                        expect(res.body).to.have.property('id')
+                        expect(res.headers.location).to.eql(`/api/restaurants/${res.body.id}`)
+
+                    })
+                    .then(postRes =>
+                        supertest(app)
+                            .get(`/api/restaurants/${postRes.body.id}`)
+                            .expect(postRes.body)
+                    )
+            })
+
+            it(`responds with 400 and an error message when the '${field}' is missing`, () => {
+                delete newRestaurant[field]
+
+                return supertest(app)
+                    .post('/api/restaurants')
+                    .send(newRestaurant)
+                    .expect(400, {
+                        error: { message: `Missing '${field}' in request body` }
+                    })
+            })
+        })
+    })
+
+
+
+
+    describe.only(`DELETE /api/restaurants/:restaurant_id`, () => {
+        context('Given there are restaurants in the database', () => {
+            const testRestaurants = makeRestaurantsArray()
+
+            beforeEach('insert restaurants', () => {
+                return db
+                    .into('restaurants')
+                    .insert(testRestaurants)
+            })
+
+            it('responds with 204 and removes the restaurant', () => {
+                const idToRemove = 2
+                const expectedRestaurants = testRestaurants.filter(restaurant => restaurant.id !== idToRemove)
+                return supertest(app)
+                    .delete(`/api/restaurants/${idToRemove}`)
+                    .expect(204)
+                    .then(res =>
+                        supertest(app)
+                            .get(`/api/restaurants`)
+                            .expect(expectedRestaurants)
+                    )
+            })
+        })
+        context(`Given no restaurants`, () => {
+            it(`responds with 404`, () => {
+                const restaurantId = 123456
+                return supertest(app)
+                    .delete(`/restaurants/${restaurantId}`)
+                    .expect(404, { error: { message: `restaurant doesn't exist` } })
+            })
+        })
+    })
 })

@@ -15,7 +15,7 @@ const serializeMenu = menu => ({
 
 // item_type food or drinks
 menusRouter
-    .route('/api/menus')
+    .route('/api/restaurants/:id/menu')
     .get((req, res, next) => {
         const knexInstance = req.app.get('db')
         MenusService.getAllMenus(knexInstance)

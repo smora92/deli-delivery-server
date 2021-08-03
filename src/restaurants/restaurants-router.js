@@ -19,12 +19,12 @@ const serializeRestaurant = restaurant => ({
 restaurantsRouter
 	.route('/api/restaurants') //get and post apply to same path so they're chained
 	.get((req, res, next) => {
-		console.log(req.app.get('db'))
+
 		RestaurantsService.getAllRestaurants(
 			req.app.get('db')
 		)
 			.then(restaurants => {
-				console.log(restaurants)
+
 				res.json(restaurants)
 			})
 			.catch(next)

@@ -6,7 +6,7 @@ const MenusService = {
     insertMenu(knex, newMenu) {
         return knex
             .insert(newMenu)
-            .into('restaurants')
+            .into('menu')
             .returning('*')
             .then(rows => {
                 return rows[0]
@@ -32,12 +32,6 @@ const MenusService = {
             .where({ id })
             .update(newMenuFields)
     }
-    // getByType(knex, item_type) {
-    //     return knex()
-    //         .from('menus')
-    //         .select('*')
-    //         .distinct('food', 'drinks')
-    //         .where(categor)
-    // }
+
 }
 module.exports = MenusService;
