@@ -12,7 +12,8 @@ const serializeRestaurant = restaurant => ({
 	restaurant_name: xss(restaurant.restaurant_name),
 	description: xss(restaurant.description),
 	rating: Number(restaurant.rating),
-	delivery_fee: Number(restaurant.delivery_fee)
+	delivery_fee: Number(restaurant.delivery_fee),
+	image: xss(restaurant.image)
 
 })
 
@@ -30,8 +31,8 @@ restaurantsRouter
 			.catch(next)
 	})
 	.post(jsonParser, (req, res, next) => {
-		const { restaurant_name, description, rating, delivery_fee } = req.body
-		const newRestauraunt = { restaurant_name, description, rating, delivery_fee }
+		const { restaurant_name, description, rating, delivery_fee, image } = req.body
+		const newRestauraunt = { restaurant_name, description, rating, delivery_fee, image }
 
 		for (const [key, value] of Object.entries(newRestauraunt)) {
 			if (value == null) {
@@ -55,7 +56,7 @@ restaurantsRouter
 	})
 
 restaurantsRouter
-	.route('/api/:id')
+	.route('/api/restaurants/:id')
 	.all((req, res, next) => {
 		RestaurantsService.getById(
 			req.app.get('db'),
@@ -89,8 +90,8 @@ restaurantsRouter
 	})
 
 	.patch(jsonParser, (req, res, next) => {
-		const { restaurant_name, description, rating, delivery_fee } = req.body
-		const updateRestaurantFields = { restaurant_name, description, rating, delivery_fee }
+		const { restaurant_name, description, rating, delivery_fee, image } = req.body
+		const updateRestaurantFields = { restaurant_name, description, rating, delivery_fee, image }
 
 		const numberOfValues = Object.values(updateRestaurantFields).filter(Boolean).length
 		if (numberOfValues === 0) {

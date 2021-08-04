@@ -13,7 +13,14 @@ const app = express()
 const morganOption = (process.env.NODE_ENV === 'production') ? 'tiny' : 'common';
 app.use(morgan(morganOption))
 app.use(helmet())
-app.use(cors())
+// app.use(cors())
+app.use(cors({
+    'allowedHeaders': ['sessionId', 'Content-Type'],
+    'exposedHeaders': ['sessionId'],
+    'origin': '*',
+    'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    'preflightContinue': false
+}));
 
 app.use(restaurantsRouter);
 app.use(menusRouter)
