@@ -3,8 +3,7 @@ const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
-// const { NODE_ENV } = require('./config')
-const { CLIENT_ORIGIN, NODE_ENV } = require('./config')
+const { NODE_ENV } = require('./config')
 const restaurantsRouter = require('./restaurants/restaurants-router')
 const menusRouter = require('./menu/menus-router')
 const { response } = require('express')
@@ -13,14 +12,8 @@ const app = express()
 const morganOption = (process.env.NODE_ENV === 'production') ? 'tiny' : 'common';
 app.use(morgan(morganOption))
 app.use(helmet())
-// app.use(cors())
-app.use(cors({
-    'allowedHeaders': ['sessionId', 'Content-Type'],
-    'exposedHeaders': ['sessionId'],
-    'origin': '*',
-    'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    'preflightContinue': false
-}));
+app.use(cors())
+
 
 app.use(restaurantsRouter);
 app.use(menusRouter)

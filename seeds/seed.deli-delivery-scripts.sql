@@ -1,19 +1,19 @@
 
 -- BEGIN;
--- ALTER TABLE restaurants
--- ADD COLUMN image VARCHAR; 
+ALTER TABLE restaurants
+ADD COLUMN image VARCHAR; 
 
--- ALTER TABLE IF EXISTS menu
--- DROP COLUMN image;
--- DROP TABLE IF EXISTS menu;
+ALTER TABLE IF EXISTS menu
+DROP COLUMN image;
+DROP TABLE IF EXISTS menu;
 
--- ALTER TABLE menu
--- ADD COLUMN 'restaurant_id' FOREIGN KEY REFERENCES restaurants(id) ON DELETE SET NULL;
+ALTER TABLE menu
+ADD COLUMN 'restaurant_id' FOREIGN KEY REFERENCES restaurants(id) ON DELETE SET NULL;
 
--- INSERT INTO restaurants (restaurant_name,description,rating,delivery_fee)
--- VALUES ('McDonalds', 'American','2.1', '2.20'), ('Juice point', 'healthy', '4.8',  '5.00' ), ('five guys', 'fast food', '3.5',  '3.00' ),
---   ('La Serre','french breakfast','4.5','6.00'), ('wendys','fresh meat','4.2', '2.20'),
---   ('Paul','Bakery & restaurant','4.7', '4.40')
+INSERT INTO restaurants (restaurant_name,description,rating,delivery_fee)
+VALUES ('McDonalds', 'American','2.1', '2.20'), ('Juice point', 'healthy', '4.8',  '5.00' ), ('five guys', 'fast food', '3.5',  '3.00' ),
+  ('La Serre','french breakfast','4.5','6.00'), ('wendys','fresh meat','4.2', '2.20'),
+  ('Paul','Bakery & restaurant','4.7', '4.40')
 
 
 -- INSERT INTO restaurants (restaurant_name,description,id,image,delivery_fee)
@@ -21,10 +21,10 @@
 -- ON CONFLICT ON CONSTRAINT restaurant_id
 -- DO NOTHING;
 
--- INSERT INTO restaurants (restaurant_name,description,id,image,delivery_fee)
--- VALUES('jddff','drinks','e41d73d7-5870-4ef2-831e-c977f22ee023', 'NULL', '2.00')
--- ON CONFLICT ON CONSTRAINT restaurant_id
--- DO UPDATE SET image = 'https://github.com/smora92/deli-delivery-server/blob/main/src/images/hiang-kanjinna-TblrCnbSj5Q-unsplash.jpg';
+INSERT INTO restaurants (restaurant_name,description,id,image,delivery_fee)
+VALUES('kings','fast-food','c17ee177-444b-4d1c-a3df-0cc1b064d66b', 'NULL', '6.00')
+ON CONFLICT ON CONSTRAINT restaurant_id
+DO UPDATE SET image = 'https://raw.githubusercontent.com/smora92/deli-delivery-server/main/src/images/tareq-alkhamees-lpIq5XJ30fA-unsplash.jpg';
 
 
 INSERT INTO
