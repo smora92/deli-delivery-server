@@ -23,8 +23,6 @@ describe.only('Restaurants Endpoints', function () {
 
 
 
-
-
     describe(`GET /api/restaurants`, () => {
 
         context(`Given no restaurants`, () => {
