@@ -15,14 +15,14 @@ CREATE TABLE IF NOT EXISTS "restaurants"(
 -- ALTER TABLE "restaurants" ADD CONSTRAINT "chk_rating" CHECK ("rating > 0 AND rating <= 5")
 -- REFERENCES "restaurants"("rating");
 
+-- DROP TYPE IF EXISTS item_type;
+-- CREATE TYPE item_type AS ENUM(
+--   'food',
+--   'drinks'
+-- );
 
-CREATE TYPE  item_type AS ENUM (
-  'food',
-  'drinks'
-);
 
-
-CREATE TABLE IF NOT EXISTS "menu" (
+CREATE TABLE IF NOT EXISTS "menu"(
     "item_id" uuid default uuid_generate_v4(),
     "item_name" TEXT NOT NULL, 
     "price" decimal(12, 2) NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS "menu" (
     CONSTRAINT "item_id" PRIMARY KEY ("item_id")
 );
 
-CREATE TABLE IF NOT EXISTS "customers" (
+CREATE TABLE IF NOT EXISTS "customers"(
   "customer_id" uuid default uuid_generate_v4() PRIMARY KEY,
   "customer_name" VARCHAR(255) NOT NULL,
   "address" VARCHAR(1024) NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS "customers" (
   "mobile" VARCHAR(255)
   );
 
-CREATE TABLE IF NOT EXISTS "orders" (
+CREATE TABLE IF NOT EXISTS "orders"(
    "order_id" serial PRIMARY KEY,
    "delivery_fee" decimal(12, 2) NOT NULL,
    "order_total" decimal(12, 2) NOT NULL,
@@ -49,13 +49,12 @@ CREATE TABLE IF NOT EXISTS "orders" (
 );
 
 
-CREATE TABLE IF NOT EXISTS "order_items" (
+CREATE TABLE IF NOT EXISTS "order_items"(
   "order_item_id" serial PRIMARY KEY,
   "item_id" uuid NOT NULL,
    "order_id" integer NOT NULL,
    "quantity" integer  NOT NULL,
-   FOREIGN KEY (item_id) REFERENCES menu(item_id) ON DELETE CASCADE,
-   FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE
+   FOREIGN KEY (item_id) REFERENCES menu(item_id) ON DELETE CASCADE
 );
 
 
