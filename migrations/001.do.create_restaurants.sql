@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS "customers" (
   );
 
 CREATE TABLE IF NOT EXISTS "orders" (
-   "order_id" serial,
+   "order_id" serial PRIMARY KEY,
    "delivery_fee" decimal(12, 2) NOT NULL,
    "order_total" decimal(12, 2) NOT NULL,
    "customer_id" uuid NULL,
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS "orders" (
 
 
 CREATE TABLE IF NOT EXISTS "order_items" (
-  "order_item_id" serial AUTO_INCREMENT,
+  "order_item_id" serial PRIMARY KEY,
   "item_id" uuid NOT NULL,
    "order_id" integer NOT NULL,
    "quantity" integer  NOT NULL,
