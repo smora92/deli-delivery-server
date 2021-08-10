@@ -17,8 +17,8 @@ CREATE TABLE IF NOT EXISTS "restaurants"(
 
 
 CREATE TYPE  item_type AS ENUM (
-  food,
-  drinks
+  'food',
+  'drinks'
 );
 
 
