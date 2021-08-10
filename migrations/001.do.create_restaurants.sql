@@ -2,7 +2,7 @@
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
-CREATE TABLE IF NOT EXISTS 'restaurants'(
+CREATE TABLE IF NOT EXISTS "restaurants"(
   'id' uuid default uuid_generate_v4(),
   'restaurant_name' TEXT NOT NULL,
   'description' TEXT NOT NULL, 
@@ -22,7 +22,7 @@ CREATE TYPE  item_type AS ENUM (
 );
 
 
-CREATE TABLE IF NOT EXISTS 'menu' (
+CREATE TABLE IF NOT EXISTS "menu" (
     'item_id' uuid default uuid_generate_v4(),
     'item_name' TEXT NOT NULL, 
     'price' decimal(12, 2) NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS 'menu' (
     CONSTRAINT 'item_id' PRIMARY KEY ('item_id')
 );
 
-CREATE TABLE IF NOT EXISTS 'customers' (
+CREATE TABLE IF NOT EXISTS "customers" (
   'customer_id' uuid default uuid_generate_v4() PRIMARY KEY,
   'customer_name' VARCHAR(255) NOT NULL,
   'address' VARCHAR(1024) NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS 'customers' (
   'mobile' VARCHAR(255)
   );
 
-CREATE TABLE IF NOT EXISTS 'orders' (
+CREATE TABLE IF NOT EXISTS "orders" (
    'order_id' serial,
    'delivery_fee' decimal(12, 2) NOT NULL,
    'order_total' decimal(12, 2) NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS 'orders' (
 );
 
 
-CREATE TABLE IF NOT EXISTS 'order_items' (
+CREATE TABLE IF NOT EXISTS "order_items" (
   'order_item_id' serial AUTO_INCREMENT,
   'item_id' uuid NOT NULL,
    'order_id' integer NOT NULL,
