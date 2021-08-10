@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS "restaurants"(
   "id" uuid default uuid_generate_v4(),
   "restaurant_name" TEXT NOT NULL,
   "description" TEXT NOT NULL, 
-  "rating" decimal(2, 1) CHECK ("rating >=1 AND rating <= 5"),
+  "rating" decimal(2, 1),
   "delivery_fee" decimal(12, 2) NOT NULL,
   CONSTRAINT "restaurant_id" PRIMARY KEY ("id")
   -- CONSTRAINT "restaurant_rating_check" CHECK (rating >=1 AND rating <= 5)
