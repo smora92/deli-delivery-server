@@ -15,8 +15,8 @@ app.use(helmet())
 app.use(cors())
 
 
-app.use(restaurantsRouter);
-app.use(menusRouter)
+app.use('/api/restaurants', restaurantsRouter);
+app.use('/api/menu', menusRouter)
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
