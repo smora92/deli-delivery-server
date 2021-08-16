@@ -19,7 +19,7 @@ app.use('/api/restaurants', restaurantsRouter);
 app.use('/api/menu', menusRouter)
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    res.send('Hi World!')
 })
 
 app.use(function errorHandler(error, req, res, next) {
