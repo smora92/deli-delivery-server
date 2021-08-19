@@ -9,17 +9,15 @@ CREATE TABLE IF NOT EXISTS "restaurants"(
   "rating" decimal(2, 1),
   "delivery_fee" decimal(12, 2) NOT NULL,
   CONSTRAINT "restaurant_id" PRIMARY KEY ("id")
-  -- CONSTRAINT "restaurant_rating_check" CHECK (rating >=1 AND rating <= 5)
 );
+  -- CONSTRAINT "restaurant_rating_check" CHECK (rating >=1 AND rating <= 5)
 
 -- ALTER TABLE "restaurants" ADD CONSTRAINT "chk_rating" CHECK ("rating > 0 AND rating <= 5")
 -- REFERENCES "restaurants"("rating");
 
 -- DROP TYPE IF EXISTS item_type;
--- CREATE TYPE item_type AS ENUM(
---   'food',
---   'drinks'
--- );
+CREATE TYPE item_type AS ENUM('food', 'drinks'
+);
 
 
 CREATE TABLE IF NOT EXISTS "menu"(

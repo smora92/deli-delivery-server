@@ -1,5 +1,9 @@
 require('dotenv').config()
 
+console.log("env_db_url", process.env.DATABASE_URL)
+console.log("node_env", process.env.NODE_ENV)
+
+
 module.exports = {
     "validateChecksums": false,
     "migrationsDirectory": "migrations",
